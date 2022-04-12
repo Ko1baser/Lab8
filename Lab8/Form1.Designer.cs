@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.txtBox = new System.Windows.Forms.TextBox();
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -38,6 +39,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnDeleteValue = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.keysList = new System.Windows.Forms.ListBox();
+            this.btnList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtBox
@@ -46,13 +51,12 @@
             this.txtBox.Name = "txtBox";
             this.txtBox.Size = new System.Drawing.Size(209, 23);
             this.txtBox.TabIndex = 0;
-            this.txtBox.TextChanged += new System.EventHandler(this.txtBox_TextChanged);
             // 
             // btnCreate
             // 
-            this.btnCreate.Location = new System.Drawing.Point(378, 93);
+            this.btnCreate.Location = new System.Drawing.Point(378, 133);
             this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(75, 23);
+            this.btnCreate.Size = new System.Drawing.Size(85, 23);
             this.btnCreate.TabIndex = 1;
             this.btnCreate.Text = "Create";
             this.btnCreate.UseVisualStyleBackColor = true;
@@ -60,9 +64,9 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(378, 133);
+            this.btnDelete.Location = new System.Drawing.Point(378, 190);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(85, 23);
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -74,7 +78,6 @@
             this.txtBoxName.Name = "txtBoxName";
             this.txtBoxName.Size = new System.Drawing.Size(209, 23);
             this.txtBoxName.TabIndex = 3;
-            this.txtBoxName.TextChanged += new System.EventHandler(this.txtBoxName_TextChanged);
             // 
             // txtBoxValue
             // 
@@ -109,7 +112,6 @@
             this.label2.Size = new System.Drawing.Size(163, 15);
             this.label2.TabIndex = 7;
             this.label2.Text = "Введите имя нового раздела";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -129,11 +131,53 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Введите значение нового параметра";
             // 
+            // btnDeleteValue
+            // 
+            this.btnDeleteValue.Location = new System.Drawing.Point(378, 251);
+            this.btnDeleteValue.Name = "btnDeleteValue";
+            this.btnDeleteValue.Size = new System.Drawing.Size(85, 23);
+            this.btnDeleteValue.TabIndex = 10;
+            this.btnDeleteValue.Text = "Delete value";
+            this.btnDeleteValue.UseVisualStyleBackColor = true;
+            this.btnDeleteValue.Click += new System.EventHandler(this.btnDeleteValue_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(725, 202);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(8, 8);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // keysList
+            // 
+            this.keysList.FormattingEnabled = true;
+            this.keysList.ItemHeight = 15;
+            this.keysList.Location = new System.Drawing.Point(72, 280);
+            this.keysList.Name = "keysList";
+            this.keysList.Size = new System.Drawing.Size(391, 94);
+            this.keysList.TabIndex = 12;
+            // 
+            // btnList
+            // 
+            this.btnList.Location = new System.Drawing.Point(508, 311);
+            this.btnList.Name = "btnList";
+            this.btnList.Size = new System.Drawing.Size(85, 23);
+            this.btnList.TabIndex = 13;
+            this.btnList.Text = "Get keys";
+            this.btnList.UseVisualStyleBackColor = true;
+            this.btnList.Click += new System.EventHandler(this.btnList_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(731, 433);
+            this.ClientSize = new System.Drawing.Size(731, 428);
+            this.Controls.Add(this.btnList);
+            this.Controls.Add(this.keysList);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnDeleteValue);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -144,6 +188,7 @@
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.txtBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -163,5 +208,9 @@
         private Label label2;
         private Label label3;
         private Label label4;
+        private Button btnDeleteValue;
+        private Button button2;
+        private ListBox keysList;
+        private Button btnList;
     }
 }
