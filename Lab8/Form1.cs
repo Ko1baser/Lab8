@@ -8,36 +8,32 @@ namespace Lab8
         public Form1()
         {
             InitializeComponent();
-            
             btnCreate.Enabled = false;
             btnDelete.Enabled = false;
             txtBox.Enabled = false; txtBox.Text = null;
             txtBoxName.Enabled = false;
             txtBoxValue.Enabled = false;
-
-
             List<string> registryList = new List<string>() { "HKEY_CLASSES_ROOT", "HKEY_CURRENT_USER", 
                 "HKEY_LOCAL_MACHINE", "HKEY_USERS", "HKEY_CURRENT_CONFIG" };
             cmbBoxRegistryList.Items.AddRange(registryList.ToArray());
-
         }
 
-        
-
+        static string subFolderPath;
+        static string KeyName;
+        RegistryKey currentuserkey;
+        RegistryKey myKey;
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            RegistryKey currentuserkey;
-            RegistryKey myKey;
-
+            
             if (txtBox.Text != null)
             {
                 switch (cmbBoxRegistryList.SelectedIndex)
                 {
                     case 0:
                         currentuserkey = Registry.ClassesRoot;
-                        myKey = currentuserkey.CreateSubKey(txtBox.Text);
-
+                        CreateKey(currentuserkey, txtBox.Text,
+                            txtBoxName.Text, txtBoxValue.Text);
                         break;
                     case 1:
                         currentuserkey = Registry.CurrentUser;
@@ -46,15 +42,18 @@ namespace Lab8
                         break;
                     case 2:
                         currentuserkey = Registry.LocalMachine;
-                        myKey = currentuserkey.CreateSubKey(txtBox.Text);
+                        CreateKey(currentuserkey, txtBox.Text,
+                            txtBoxName.Text, txtBoxValue.Text);
                         break;
                     case 3:
                         currentuserkey = Registry.Users;
-                        myKey = currentuserkey.CreateSubKey(txtBox.Text);
+                        CreateKey(currentuserkey, txtBox.Text,
+                            txtBoxName.Text, txtBoxValue.Text);
                         break;
                     case 4:
                         currentuserkey = Registry.CurrentConfig;
-                        myKey = currentuserkey.CreateSubKey(txtBox.Text);
+                        CreateKey(currentuserkey, txtBox.Text,
+                            txtBoxName.Text, txtBoxValue.Text);
                         break;
                     default:
                         MessageBox.Show("Ничего нет");
@@ -105,6 +104,22 @@ namespace Lab8
         private void txtBoxName_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                subFolderPath = Convert.ToString(txtBox.Text);
+                Registry.CurrentUser.DeleteSubKeyTree(Path.Combine(@"Software", subFolderPath));
+
+
+                MessageBox.Show("Ключ успешно удален! Обновите реестр");
+            }
+            catch
+            {
+                MessageBox.Show("Вы не указали название, либо такого ключа не существует");
+            }
         }
     }
 }
