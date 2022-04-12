@@ -11,7 +11,7 @@ namespace Lab8
             
             btnCreate.Enabled = false;
             btnDelete.Enabled = false;
-            txtBox.Enabled = false;
+            txtBox.Enabled = false; txtBox.Text = null;
             txtBoxName.Enabled = false;
             txtBoxValue.Enabled = false;
 
@@ -37,12 +37,12 @@ namespace Lab8
                     case 0:
                         currentuserkey = Registry.ClassesRoot;
                         myKey = currentuserkey.CreateSubKey(txtBox.Text);
-                        
+
                         break;
                     case 1:
                         currentuserkey = Registry.CurrentUser;
-                        myKey = currentuserkey.CreateSubKey(txtBox.Text);
-                        //MessageBox.Show((string)Registry.GetValue(cmbBoxRegistryList.SelectedItem.ToString(), txtBoxValue.Text, ""));
+                        CreateKey(currentuserkey, txtBox.Text,
+                            txtBoxName.Text, txtBoxValue.Text);
                         break;
                     case 2:
                         currentuserkey = Registry.LocalMachine;
@@ -60,19 +60,28 @@ namespace Lab8
                         MessageBox.Show("Ничего нет");
                         break;
                 }
-
-                
-                    //RegistryKey currentuserkey = Registry.CurrentUser;
-                    //RegistryKey myKey = currentuserkey.CreateSubKey(txtBox.Text);
-                    //myKey.SetValue(txtBoxName.Text, txtBoxValue.Text);
-                    //txtBox.Text = null;
-                    //txtBoxName.Text = null;
+                txtBox.Text = null;
+                txtBoxName.Text = null;
                 txtBoxValue.Text = null;
-
-                
-            }            
+            }
+            else if (txtBox.Text == null)
+            {
+                MessageBox.Show("Вы ничего не выбрали");
+            }
                 
         }
+
+
+        public static void CreateKey(RegistryKey currentuserkey, 
+            string textBOX,string Name, string Value)
+        {
+            RegistryKey myKey;
+            myKey = currentuserkey.CreateSubKey(textBOX);
+            myKey.SetValue(Name, Value);
+            MessageBox.Show("Вы что-то создали");
+        }
+
+
 
         private void cmbBoxRegistryList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -84,6 +93,16 @@ namespace Lab8
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBoxName_TextChanged(object sender, EventArgs e)
         {
 
         }

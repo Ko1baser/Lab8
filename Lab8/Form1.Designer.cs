@@ -46,6 +46,7 @@
             this.txtBox.Name = "txtBox";
             this.txtBox.Size = new System.Drawing.Size(209, 23);
             this.txtBox.TabIndex = 0;
+            this.txtBox.TextChanged += new System.EventHandler(this.txtBox_TextChanged);
             // 
             // btnCreate
             // 
@@ -72,6 +73,7 @@
             this.txtBoxName.Name = "txtBoxName";
             this.txtBoxName.Size = new System.Drawing.Size(209, 23);
             this.txtBoxName.TabIndex = 3;
+            this.txtBoxName.TextChanged += new System.EventHandler(this.txtBoxName_TextChanged);
             // 
             // txtBoxValue
             // 
