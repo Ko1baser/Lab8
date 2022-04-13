@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.txtBox = new System.Windows.Forms.TextBox();
             this.btnCreate = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnDeleteName = new System.Windows.Forms.Button();
             this.txtBoxName = new System.Windows.Forms.TextBox();
             this.txtBoxValue = new System.Windows.Forms.TextBox();
             this.cmbBoxRegistryList = new System.Windows.Forms.ComboBox();
@@ -43,6 +43,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.keysList = new System.Windows.Forms.ListBox();
             this.btnList = new System.Windows.Forms.Button();
+            this.btnDeleteKey = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtBox
@@ -51,10 +52,11 @@
             this.txtBox.Name = "txtBox";
             this.txtBox.Size = new System.Drawing.Size(209, 23);
             this.txtBox.TabIndex = 0;
+            this.txtBox.TextChanged += new System.EventHandler(this.txtBox_TextChanged);
             // 
             // btnCreate
             // 
-            this.btnCreate.Location = new System.Drawing.Point(378, 133);
+            this.btnCreate.Location = new System.Drawing.Point(287, 133);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(85, 23);
             this.btnCreate.TabIndex = 1;
@@ -62,15 +64,15 @@
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
-            // btnDelete
+            // btnDeleteName
             // 
-            this.btnDelete.Location = new System.Drawing.Point(378, 190);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(85, 23);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDeleteName.Location = new System.Drawing.Point(287, 190);
+            this.btnDeleteName.Name = "btnDeleteName";
+            this.btnDeleteName.Size = new System.Drawing.Size(85, 23);
+            this.btnDeleteName.TabIndex = 2;
+            this.btnDeleteName.Text = "Delete name";
+            this.btnDeleteName.UseVisualStyleBackColor = true;
+            this.btnDeleteName.Click += new System.EventHandler(this.btnDeleteName_Click);
             // 
             // txtBoxName
             // 
@@ -78,6 +80,7 @@
             this.txtBoxName.Name = "txtBoxName";
             this.txtBoxName.Size = new System.Drawing.Size(209, 23);
             this.txtBoxName.TabIndex = 3;
+            this.txtBoxName.TextChanged += new System.EventHandler(this.txtBoxName_TextChanged);
             // 
             // txtBoxValue
             // 
@@ -85,6 +88,7 @@
             this.txtBoxValue.Name = "txtBoxValue";
             this.txtBoxValue.Size = new System.Drawing.Size(209, 23);
             this.txtBoxValue.TabIndex = 4;
+            this.txtBoxValue.TextChanged += new System.EventHandler(this.txtBoxValue_TextChanged);
             // 
             // cmbBoxRegistryList
             // 
@@ -133,7 +137,7 @@
             // 
             // btnDeleteValue
             // 
-            this.btnDeleteValue.Location = new System.Drawing.Point(378, 251);
+            this.btnDeleteValue.Location = new System.Drawing.Point(287, 251);
             this.btnDeleteValue.Name = "btnDeleteValue";
             this.btnDeleteValue.Size = new System.Drawing.Size(85, 23);
             this.btnDeleteValue.TabIndex = 10;
@@ -169,11 +173,22 @@
             this.btnList.UseVisualStyleBackColor = true;
             this.btnList.Click += new System.EventHandler(this.btnList_Click);
             // 
+            // btnDeleteKey
+            // 
+            this.btnDeleteKey.Location = new System.Drawing.Point(378, 133);
+            this.btnDeleteKey.Name = "btnDeleteKey";
+            this.btnDeleteKey.Size = new System.Drawing.Size(85, 23);
+            this.btnDeleteKey.TabIndex = 14;
+            this.btnDeleteKey.Text = "Delete key";
+            this.btnDeleteKey.UseVisualStyleBackColor = true;
+            this.btnDeleteKey.Click += new System.EventHandler(this.btnDeleteKey_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(731, 428);
+            this.Controls.Add(this.btnDeleteKey);
             this.Controls.Add(this.btnList);
             this.Controls.Add(this.keysList);
             this.Controls.Add(this.button2);
@@ -185,7 +200,7 @@
             this.Controls.Add(this.cmbBoxRegistryList);
             this.Controls.Add(this.txtBoxValue);
             this.Controls.Add(this.txtBoxName);
-            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnDeleteName);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.txtBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -200,7 +215,7 @@
 
         private TextBox txtBox;
         private Button btnCreate;
-        private Button btnDelete;
+        private Button btnDeleteName;
         private TextBox txtBoxName;
         private TextBox txtBoxValue;
         private ComboBox cmbBoxRegistryList;
@@ -212,5 +227,6 @@
         private Button button2;
         private ListBox keysList;
         private Button btnList;
+        private Button btnDeleteKey;
     }
 }
