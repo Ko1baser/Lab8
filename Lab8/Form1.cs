@@ -6,136 +6,133 @@ namespace Lab8
 {
     public partial class Form1 : Form
     {
-
-        RegistryKey currentuserkey;
-        RegistryKey myKey;
-        RegistryKey mainKey;
+        private RegistryKey _currentKey, _myKey, _mainKey;
 
         public Form1()
         {
             InitializeComponent();
             EnableComponents();
-            List<string> registryList = new List<string>() { "HKEY_CLASSES_ROOT", "HKEY_CURRENT_USER", 
+            List<string> registryList = new() { "HKEY_CLASSES_ROOT", "HKEY_CURRENT_USER", 
                 "HKEY_LOCAL_MACHINE", "HKEY_USERS", "HKEY_CURRENT_CONFIG" };
-            cmbBoxRegistryList.Items.AddRange(registryList.ToArray());
+            CmbBoxRegistryList.Items.AddRange(registryList.ToArray());
         }
 
-        private void btnCreate_Click(object sender, EventArgs e)
+        private void BtnCreate_Click(object sender, EventArgs e)
         {
             
-            if (txtBox.Text != null)
+            if (TxtBox.Text != null)
             {
-                CreateKey(currentuserkey, txtBox.Text, txtBoxName.Text, txtBoxValue.Text);
+                CreateKey(_currentKey, TxtBox.Text, TxtBoxName.Text, TxtBoxValue.Text);
             }
-            else if (txtBox.Text == null)
+            else if (TxtBox.Text == null)
             {
                 MessageBox.Show("Вы ничего не выбрали");
             }
         }
 
 
-        public static void CreateKey(RegistryKey currentuserkey, 
+        public static void CreateKey(RegistryKey _currentKey, 
             string textBOX,string Name, string Value)
         {
-            RegistryKey myKey;
-            myKey = currentuserkey.CreateSubKey(textBOX);
-            myKey.SetValue(Name, Value);
+            RegistryKey _myKey;
+            _myKey = _currentKey.CreateSubKey(textBOX);
+            _myKey.SetValue(Name, Value);
             MessageBox.Show("Ключ создан", "Success");
         }
 
 
 
-        private void cmbBoxRegistryList_SelectedIndexChanged(object sender, EventArgs e)
+        private void CmbBoxRegistryList_SelectedIndexChanged(object sender, EventArgs e)
         {
             ButtonsEnabled();
-            switch (cmbBoxRegistryList.SelectedIndex)
+            switch (CmbBoxRegistryList.SelectedIndex)
             {
                 case 0:
-                    currentuserkey = Registry.ClassesRoot;
+                    _currentKey = Registry.ClassesRoot;
                     break;
                 case 1:
-                    currentuserkey = Registry.CurrentUser;
+                    _currentKey = Registry.CurrentUser;
                     break;
                 case 2:
-                    currentuserkey = Registry.LocalMachine;
+                    _currentKey = Registry.LocalMachine;
                     break;
                 case 3:
-                    currentuserkey = Registry.Users;
+                    _currentKey = Registry.Users;
                     break;
                 case 4:
-                    currentuserkey = Registry.CurrentConfig;
+                    _currentKey = Registry.CurrentConfig;
                     break;
             }
         }
 
         public void ButtonsEnabled()
         {
-            txtBox.Enabled = true;
-            if (txtBox.Text != "")
+            TxtBox.Enabled = true;
+            if (TxtBox.Text != "")
             {
-                btnCreate.Enabled = true;
-                btnDeleteKey.Enabled = true;
-                btnList.Enabled = true;
-                txtBoxName.Enabled = true;
+                BtnCreate.Enabled = true;
+                BtnDeleteKey.Enabled = true;
+                BtnList.Enabled = true;
+                TxtBoxName.Enabled = true;
             }
             else
             {
-                btnCreate.Enabled = false;
-                btnDeleteKey.Enabled = false;
-                btnList.Enabled = false;
-                txtBoxName.Enabled = false;
-                txtBoxName.Text = null;
-                txtBoxValue.Text = null;
+                BtnCreate.Enabled = false;
+                BtnDeleteKey.Enabled = false;
+                BtnList.Enabled = false;
+                TxtBoxName.Enabled = false;
+                TxtBoxName.Text = null;
+                TxtBoxValue.Text = null;
             }
 
-            if (txtBoxName.Text != "")
+            if (TxtBoxName.Text != "")
             {
-                btnDeleteName.Enabled = true;
-                txtBoxValue.Enabled = true;
+                BtnDeleteName.Enabled = true;
+                TxtBoxValue.Enabled = true;
             }
             else
             {
-                btnDeleteName.Enabled = false;
-                txtBoxValue.Enabled = false;
-                txtBoxValue.Text = null;
+                BtnDeleteName.Enabled = false;
+                TxtBoxValue.Enabled = false;
+                TxtBoxValue.Text = null;
             }
 
-            if (txtBoxValue.Text != "")
+            if (TxtBoxValue.Text != "")
             {
-                btnDeleteValue.Enabled = true;
+                BtnDeleteValue.Enabled = true;
             }
             else
             {
-                btnDeleteValue.Enabled = false;
+                BtnDeleteValue.Enabled = false;
 
             }
         }
 
         public void EnableComponents()
         {
-            btnCreate.Enabled = false;
-            btnDeleteName.Enabled = false;
-            txtBox.Enabled = false;
-            txtBoxName.Enabled = false;
-            txtBoxValue.Enabled = false;
-            btnDeleteValue.Enabled = false;
-            btnDeleteKey.Enabled = false;
-            btnList.Enabled = false;
+            BtnCreate.Enabled = false;
+            BtnDeleteName.Enabled = false;
+            TxtBox.Enabled = false;
+            TxtBoxName.Enabled = false;
+            TxtBoxValue.Enabled = false;
+            BtnDeleteValue.Enabled = false;
+            BtnDeleteKey.Enabled = false;
+            BtnList.Enabled = false;
         }
 
 
-        private void btnDeleteKey_Click(object sender, EventArgs e)
+        private void BtnDeleteKey_Click(object sender, EventArgs e)
         {
             ButtonsEnabled();
-            if (txtBox.Text != null)
+            if (TxtBox.Text != null)
             {
                 try
                 {
-                    currentuserkey.DeleteSubKey(txtBox.Text);
+                    _currentKey.DeleteSubKey(TxtBox.Text);
                     MessageBox.Show("ты че-то удалил");
-                    txtBox.Text = null;
-                    txtBoxName.Text = null;
-                    txtBoxValue.Text = null;
+                    TxtBox.Text = null;
+                    TxtBoxName.Text = null;
+                    TxtBoxValue.Text = null;
                 }
                 catch
                 {
@@ -144,17 +141,17 @@ namespace Lab8
             }
         }
 
-        private void btnDeleteName_Click(object sender, EventArgs e)
+        private void BtnDeleteName_Click(object sender, EventArgs e)
         {
-            if (txtBoxName.Text != null)
+            if (TxtBoxName.Text != null)
             {
                 try
                 {
-                    myKey = currentuserkey.OpenSubKey(txtBox.Text, true);
-                    myKey.DeleteValue(txtBoxName.Text);
-                    myKey.Close();
-                    MessageBox.Show($"Вы успешно удалили значение ключа {txtBoxValue}");
-                    txtBoxName.Text = null;
+                    _myKey = _currentKey.OpenSubKey(TxtBox.Text, true);
+                    _myKey.DeleteValue(TxtBoxName.Text);
+                    _myKey.Close();
+                    MessageBox.Show($"Вы успешно удалили значение ключа {TxtBoxValue}");
+                    TxtBoxName.Text = null;
                 }
                 catch
                 {
@@ -163,21 +160,21 @@ namespace Lab8
             }
         }
 
-        private void btnDeleteValue_Click(object sender, EventArgs e)
+        private void BtnDeleteValue_Click(object sender, EventArgs e)
         {
-            if (txtBoxValue.Text != null)
+            if (TxtBoxValue.Text != null)
             {
                 try
                 {
-                    myKey = currentuserkey.OpenSubKey(txtBox.Text, true);
-                    myKey.SetValue(txtBoxName.Text, "");
-                    myKey.Close();
-                    MessageBox.Show($"Вы успешно удалили значение ключа по имени {txtBoxName.Text}", "Success");
-                    txtBoxValue.Text = null;
+                    _myKey = _currentKey.OpenSubKey(TxtBox.Text, true);
+                    _myKey.SetValue(TxtBoxName.Text, "");
+                    _myKey.Close();
+                    MessageBox.Show($"Вы успешно удалили значение ключа по имени {TxtBoxName.Text}", "Success");
+                    TxtBoxValue.Text = null;
                 }
                 catch
                 {
-                    MessageBox.Show($"Ошибка удаления значения ключа по имени{txtBoxName.Text}", "Success");
+                    MessageBox.Show($"Ошибка удаления значения ключа по имени{TxtBoxName.Text}", "Success");
                 }
             }
 
@@ -185,32 +182,32 @@ namespace Lab8
 
         
 
-        private void btnList_Click(object sender, EventArgs e)
+        private void BtnList_Click(object sender, EventArgs e)
         {
-            keysList.Items.Clear();
+            KeysList.Items.Clear();
             ButtonsEnabled();
-            mainKey = currentuserkey.OpenSubKey(cmbBoxRegistryList.SelectedText);
-            string[] mainKeys = mainKey.GetSubKeyNames();
+            _mainKey = _currentKey.OpenSubKey(CmbBoxRegistryList.SelectedText);
+            string[] _mainKeys = _mainKey.GetSubKeyNames();
             int ch = 0;
-            foreach (string key in mainKeys)
+            foreach (string key in _mainKeys)
             {
-                if (key == txtBox.Text)
+                if (key == TxtBox.Text)
                 {
                     ch++;
-                    myKey = currentuserkey.OpenSubKey(txtBox.Text);
-                    string[] values = myKey.GetValueNames();
+                    _myKey = _currentKey.OpenSubKey(TxtBox.Text);
+                    string[] values = _myKey.GetValueNames();
                     if (values != null)
                     {
                         foreach (string myValue in values)
                         {
-                            keysList.Items.Add(currentuserkey + "\\" + myValue + "\\" + myKey.GetValue(myValue));
+                            KeysList.Items.Add(_currentKey + "\\" + myValue + "\\" + _myKey.GetValue(myValue));
                         }
                     }
                     else
                     {
                         MessageBox.Show("Данный ключ не содержит значений");
                     }
-                    myKey.Close();
+                    _myKey.Close();
                     break;
                 }
             }
@@ -221,17 +218,17 @@ namespace Lab8
             
         }
 
-        private void txtBox_TextChanged(object sender, EventArgs e)
+        private void TxtBox_TextChanged(object sender, EventArgs e)
         {
             ButtonsEnabled();
         }
 
-        private void txtBoxName_TextChanged(object sender, EventArgs e)
+        private void TxtBoxName_TextChanged(object sender, EventArgs e)
         {
             ButtonsEnabled();
         }
 
-        private void txtBoxValue_TextChanged(object sender, EventArgs e)
+        private void TxtBoxValue_TextChanged(object sender, EventArgs e)
         {
             ButtonsEnabled();
         }
